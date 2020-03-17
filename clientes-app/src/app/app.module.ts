@@ -9,6 +9,8 @@ import { DirectivaComponent } from './components/directiva/directiva.component';
 import { ClientesComponent } from './components/clientes/clientes.component'
 /* Servicios */
 import { ClienteService } from './components/clientes/cliente.service';
+/* Rutas */
+import { APP_ROUTING } from './app.routes'; 
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { ClienteService } from './components/clientes/cliente.service';
     ClientesComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    APP_ROUTING
   ],
   providers: [ClienteService],
   bootstrap: [AppComponent]
