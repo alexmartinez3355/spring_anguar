@@ -1,4 +1,4 @@
-/* Datos tabla cliente */  
+/* Datos tabla cliente */
 INSERT INTO clientes (nombre, apellido, email, fecha) VALUES ('Andrés', 'Guzmán', 'profesor@bolsadeideas.com', '2018-01-01');
 INSERT INTO clientes (nombre, apellido, email, fecha) VALUES ('Mr. John', 'Doe', 'john.doe@gmail.com', '2018-01-02');
 INSERT INTO clientes (nombre, apellido, email, fecha) VALUES ('Linus', 'Torvalds', 'linus.torvalds@gmail.com', '2018-01-03');
