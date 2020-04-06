@@ -6,8 +6,10 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -85,7 +87,7 @@ public class ClienteRestController {
 		try {
 			nuevo_cliente = cliente_service.save(cliente);
 		} catch (DataAccessException error) {
-			response.put("Mensaje", "Error al realizar el insert en la base de datos");
+			response.put("mensaje", "Error al realizar el insert en la base de datos");
 			response.put("error", error.getMessage().concat(": ").concat(error.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -104,7 +106,7 @@ public class ClienteRestController {
 		Map<String, Object> response = new HashMap<>();
 
 		if (cliente_actual == null) {
-			response.put("Mensaje", "Error: no se puede editar, El cliente ID: "
+			response.put("mensaje", "Error: no se puede editar, El cliente ID: "
 					.concat(id.toString().concat(" no existe en la base de datos")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
@@ -117,7 +119,7 @@ public class ClienteRestController {
 
 			cliente_actualizado = cliente_service.save(cliente_actual);
 		} catch (DataAccessException e) {
-			response.put("Mensaje", "Error al actualizar el cliente en la base de datos");
+			response.put("mensaje", "Error al actualizar el cliente en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -143,7 +145,7 @@ public class ClienteRestController {
 			cliente_service.delete(id);
 			
 		} catch (DataAccessException e) {
-			response.put("Mensaje", "Error al eliminar el cliente en la base de datos");
+			response.put("mensaje", "Error al eliminar el cliente en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
