@@ -12,6 +12,9 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="clientes")
@@ -21,12 +24,17 @@ public class Cliente implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long cliente_id;
 	
+	@NotEmpty(message = "No puede estar vacio")
+	@Size(min=4, max=12, message = "El tamaño tiene que ser entre 4 y 12 caracteres")
 	@Column(name="nombre", nullable=false)
 	private String nombre;
 	
+	@NotEmpty(message = "No puede estar vacio")
 	@Column(name="apellido")
 	private String apellido;
 	
+	@NotEmpty(message = "No puede estar vacio")
+	@Email(message = "No es una direccíon de correo correcta (ejemplo: correo@email.com)")
 	@Column(name="email", nullable=false, unique=true)
 	private String email;
 	
