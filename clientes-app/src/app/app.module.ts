@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 
 /* Module */
 import { HttpClientModule } from '@angular/common/http';
@@ -18,6 +18,11 @@ import { ClienteService } from './components/clientes/cliente.service';
 /* Rutas */
 import { APP_ROUTING } from './app.routes';
 
+/* Otros */
+import { registerLocaleData } from '@angular/common';
+import localeES from '@angular/common/locales/es-MX';
+registerLocaleData(localeES, 'es-MX');
+
 
 @NgModule({
   declarations: [
@@ -34,7 +39,7 @@ import { APP_ROUTING } from './app.routes';
     FormsModule,
     APP_ROUTING
   ],
-  providers: [ClienteService],
+  providers: [ClienteService, {provide: LOCALE_ID, useValue: 'es-MX'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
