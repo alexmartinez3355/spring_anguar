@@ -3,6 +3,7 @@ import { Cliente } from './cliente.class';
 import { ClienteService } from './cliente.service';
 import swal from 'sweetalert2';
 import { tap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -12,19 +13,31 @@ import { tap } from 'rxjs/operators';
 export class ClientesComponent implements OnInit {
 
   clientes: Cliente[];
-   
-  constructor(private clienteService: ClienteService) { }
+  paginador: any;
+
+  constructor(private clienteService: ClienteService, private activate_route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.clienteService.getClientes().pipe(
-      tap(clientes => {
-        this.clientes = clientes;
-        console.log('ClienteComponent: tap 3')
-        clientes.forEach( cliente => {
-          console.log(cliente.nombre);
+    
+    this.activate_route.paramMap.subscribe(params => {
+      let page:number = +params.get('page');
+      if(!page){
+        page = 0;
+      }
+      this.clienteService.getClientes(page)
+        .pipe(
+          tap(response => {
+            /* console.log('ClienteComponent: tap 3'); */
+            (response.content as Cliente[]).forEach(cliente => {
+              /* console.log(cliente.nombre); */
+            });
+          })
+        ).subscribe(response => {
+          this.clientes = response.content as Cliente[];
+          this.paginador = response;
         });
-      })
-    ).subscribe();
+    })
+
   }
 
   delete(cliente: Cliente): void {
@@ -35,7 +48,7 @@ export class ClientesComponent implements OnInit {
       },
       buttonsStyling: false
     })
-    
+
     swalWithBootstrapButtons.fire({
       title: '¿Estas seguro?',
       text: `¿Estas seguro que desea eliminar al cliente ${cliente.nombre} ${cliente.apellido}?`,
@@ -56,7 +69,7 @@ export class ClientesComponent implements OnInit {
             )
           }
         )
-        
+
       }
     })
   }

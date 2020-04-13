@@ -40,8 +40,6 @@
                 </tr>
             </tbody>
         </table>
-        <!--       <ng-template #noHayObjetos>
-          <h4>No hay datos</h4>
-      </ng-template> -->
+        <paginator-nav *ngIf="paginador" [paginador] = "paginador"></paginator-nav>
     </div>
 </div>

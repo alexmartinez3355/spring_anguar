@@ -1,11 +1,17 @@
 package com.mc.corp.spring.boot.backent.apirest.models.services;
 
 import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.mc.corp.spring.boot.backent.apirest.models.entity.Cliente;
 
 public interface iClienteService {
 	
 	public List<Cliente> findAll();
+	
+	public Page<Cliente> findAll(Pageable pageable);
 	
 	// Metodo que realiza la busqueda de un cliente por medio de un ID. Recive un Id de cliente y debuelve un cliente.
 	public Cliente findById(Long id);

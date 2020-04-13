@@ -12,15 +12,18 @@ import { FooterComponent } from './components/footer/footer.component';
 import { DirectivaComponent } from './components/directiva/directiva.component';
 import { ClientesComponent } from './components/clientes/clientes.component'
 import { FormComponent } from './components/clientes/form.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
 
 /* Servicios */
 import { ClienteService } from './components/clientes/cliente.service';
+
 /* Rutas */
 import { APP_ROUTING } from './app.routes';
 
 /* Otros */
 import { registerLocaleData } from '@angular/common';
 import localeES from '@angular/common/locales/es-MX';
+
 registerLocaleData(localeES, 'es-MX');
 
 
@@ -31,7 +34,8 @@ registerLocaleData(localeES, 'es-MX');
     FooterComponent,
     DirectivaComponent,
     ClientesComponent,
-    FormComponent
+    FormComponent,
+    PaginatorComponent
   ],
   imports: [
     BrowserModule,
